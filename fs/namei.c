@@ -125,11 +125,6 @@
 
 #define EMBEDDED_NAME_MAX	(PATH_MAX - offsetof(struct filename, iname))
 
-#ifdef CONFIG_NOMOUNT
-extern struct filename *nomount_handle_getname(struct filename *name);
-extern int nomount_handle_permission(struct inode *inode, int mask);
-#endif
-
 struct filename *
 getname_flags(const char __user *filename, int flags, int *empty)
 {
@@ -254,11 +249,6 @@ getname_kernel(const char * filename)
 	result->uptr = NULL;
 	result->aname = NULL;
 	result->refcnt = 1;
-#ifdef CONFIG_NOMOUNT
-	if (!IS_ERR(result)) {
-		result = nomount_handle_getname(result);
-	}
-#endif
 	audit_getname(result);
 
 	return result;
