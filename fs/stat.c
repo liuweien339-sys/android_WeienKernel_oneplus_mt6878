@@ -159,7 +159,6 @@ int vfs_getattr(const struct path *path, struct kstat *stat,
 	if (retval)
 		return retval;
 	return vfs_getattr_nosec(path, stat, request_mask, query_flags);
-#endif
 }
 EXPORT_SYMBOL(vfs_getattr);
 
